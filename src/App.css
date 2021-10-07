@@ -1,0 +1,8 @@
+.parent-cont{
+    padding: 0px 100px 0px 90px;
+}
+@media screen and (max-width: 600px){
+    .parent-cont{
+        padding: 0;
+    }
+}

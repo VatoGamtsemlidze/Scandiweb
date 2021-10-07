@@ -1,0 +1,39 @@
+.product-list{
+    padding-top: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-column-gap: 100px;
+    grid-row-gap: 20px;
+}
+.product-list h3{
+    font-weight: lighter;
+    font-size: 18px;
+    transition: 1s;
+}
+.product-list h3:hover{
+    color:#5ECE7B;
+}
+.cart-icon{
+    color:#5ECE7B;
+}
+.cart-icon:hover{
+    color:#5ECE7B;
+}
+.card{
+    padding:15px;
+    cursor: pointer;
+    transition: 1s;
+}
+.card:hover{
+    box-shadow: 1px 3px 15px rgba(0,0,0,0.2);
+}
+@media screen and (max-width: 1000px){
+    .product-list{
+        grid-template-columns: 1fr 1fr;
+    }
+}
+@media screen and (max-width: 600px){
+    .product-list{
+        grid-template-columns: 1fr;
+    }
+}

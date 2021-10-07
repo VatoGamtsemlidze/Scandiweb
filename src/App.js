@@ -1,14 +1,20 @@
 import React, {Component} from 'react';
-import Category from "./pages/Category";
-import Content from "./components/Content";
+import Topbar from "./layout/Topbar";
+import CategoryName from "./layout/CategoryName";
+import './App.css'
+import ProductList from "./layout/ProductList";
 
 class App extends Component {
     render() {
         return (
-            <Content>
-                <Category/>
-            </Content>
-        );
+            <>
+            <Topbar/>
+                <div className="parent-cont">
+                    <CategoryName category={"Women"}/>
+                    <ProductList/>
+                </div>
+            </>
+        )
     }
 }
 
