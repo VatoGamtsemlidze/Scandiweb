@@ -1,24 +1,22 @@
-import {ADD_PRODUCT, REMOVE_PRODUCT} from "./cartConsts";
+import {ADD_ITEM, REMOVE_ITEM} from "./cartConsts";
 
 const initialStore = {
-    products: []
+    cart: []
 }
 
-export default function cartReducer(store = initialStore, action){
-    switch (action.type){
-        case ADD_PRODUCT:
+export const cartReducer = (store = initialStore, action) => {
+    switch(action.type){
+        case ADD_ITEM:
             return {
                 ...store,
-                products: [...store.products, action.product]
+                cart: [...store.cart, action.item]
             }
-        case REMOVE_PRODUCT:
+        case REMOVE_ITEM:
             return {
                 ...store,
-                products: store.products.filter(
+                cart: store.cart.filter(
                     (item) => item.id !== action.index,
                 ),
-                //filter or splice with action.index
-
             }
         default:
             return store

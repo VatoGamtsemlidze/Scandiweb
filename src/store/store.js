@@ -1,9 +1,9 @@
 import {createStore} from 'redux';
-import combineReducer from "./combineReducer";
+import combineReducers from "./combineReducers";
 
 
 const store = createStore(
-    combineReducer,
+    combineReducers,
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
 

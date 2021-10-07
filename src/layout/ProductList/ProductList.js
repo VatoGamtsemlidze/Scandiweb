@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import './ProductListStyle.css'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faShoppingCart} from "@fortawesome/free-solid-svg-icons";
+import {addItemAction, removeItemAction} from "../../store/cart/cartActions";
+import {connect} from "react-redux";
 
 class ProductList extends Component {
 
@@ -41,6 +43,9 @@ class ProductList extends Component {
     ]
 
     render() {
+
+        const currency = this.props.currency.currency
+
         return (
             <div style={{display:"flex",justifyContent:"center"}}>
             <div className="product-list">
@@ -50,8 +55,8 @@ class ProductList extends Component {
                             <img style={{maxWidth:"100%"}} src={el.image} alt=""/>
                             <h3>{el.title}</h3>
                             <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
-                                <h3 style={{fontWeight:400}}>${el.price}</h3>
-                                <FontAwesomeIcon icon={faShoppingCart} className="cart-icon"/>
+                                <h3 style={{fontWeight:400}}>{currency} {el.price}</h3>
+                                <FontAwesomeIcon onClick={() => this.props.addItemAction(el)} icon={faShoppingCart} className="cart-icon"/>
                             </div>
                         </div>
                     )
@@ -62,4 +67,18 @@ class ProductList extends Component {
     }
 }
 
-export default ProductList;
+const mapStateToProps = (state) => {
+    return{
+        cartReducer: state.cartReducer,
+        currency: state.currencyReducer
+    }
+}
+
+const mapDispatchToProps = () => {
+    return{
+        addItemAction,
+        removeItemAction
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps())(ProductList);

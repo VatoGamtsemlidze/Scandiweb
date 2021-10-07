@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
-import Topbar from "./layout/Topbar";
+import Topbar from "./layout/Topbar/Topbar";
 import CategoryName from "./layout/CategoryName";
 import './App.css'
-import ProductList from "./layout/ProductList";
+import ProductList from "./layout/ProductList/ProductList";
 
 class App extends Component {
+
     render() {
         return (
             <>
@@ -17,5 +18,4 @@ class App extends Component {
         )
     }
 }
-
 export default App;

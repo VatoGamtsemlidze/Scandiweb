@@ -1,14 +1,14 @@
-import {ADD_PRODUCT, REMOVE_PRODUCT} from "./productConsts";
+import {ADD_ITEM,REMOVE_ITEM} from "./cartConsts";
 
-export const addProductAction = (product) => {
-    return {
-        type: ADD_PRODUCT,
-        product
+export const addItemAction = (item) => {
+    return{
+        type: ADD_ITEM,
+        item
     }
 }
-export const removeProductAction = (index) => {
-    return {
-        type: REMOVE_PRODUCT,
+export const removeItemAction = (index) => {
+    return{
+        type: REMOVE_ITEM,
         index
     }
 }
