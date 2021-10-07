@@ -1,0 +1,41 @@
+.card{
+    padding:35px;
+    cursor:pointer;
+    transition: 1s;
+}
+.product-list{
+    display:grid;
+    max-width:100%;
+    grid-template-columns: repeat(3, 1fr);
+}
+.card:hover{
+    box-shadow: 1px 3px 15px rgba(0,0,0,0.2);
+}
+.product-price{
+    color: #1f1d22;
+    font-weight:500;
+    transition: 1s;
+}
+.product-title{
+    color:#3c3d40;
+    font-weight:300;
+    font-size:18px;
+    transition: 1s;
+}
+.product-price:hover{
+    color: #5ece7b;
+}
+.product-title:hover{
+    color: #5ece7b;
+}
+.cart-icon{
+    color:#5ece7b;
+    padding:15px;
+    border:none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition:1s;
+}
+.cart-icon:hover{
+    box-shadow: 1px 3px 15px rgba(0,0,0,0.3);
+}
