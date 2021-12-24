@@ -14,18 +14,25 @@
     color:#5ECE7B;
 }
 .cart-icon{
+    font-size: 20px;
     color:#5ECE7B;
 }
 .cart-icon:hover{
     color:#5ECE7B;
 }
 .card{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     padding:15px;
+    border: 1px solid #dee8e0;
     cursor: pointer;
     transition: 1s;
 }
 .card:hover{
-    box-shadow: 1px 3px 15px rgba(0,0,0,0.2);
+    box-shadow: 1px 1px 1px 2px rgb(190, 234, 195);
+    transform: scale(1.025);
+    border-radius: 10px;
 }
 @media screen and (max-width: 1000px){
     .product-list{

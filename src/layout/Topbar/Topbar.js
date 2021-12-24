@@ -5,6 +5,8 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCaretDown, faEuroSign, faShoppingCart, faYenSign} from "@fortawesome/free-solid-svg-icons";
 import {faDollarSign} from "@fortawesome/free-solid-svg-icons";
 import {changeCurrencyAction} from "../../store/currency/currencyActions";
+import {changeCategoryAction} from "../../store/category/categoryActions";
+import logo from '../../assets/a-logo.png'
 
 class Topbar extends Component {
 
@@ -37,26 +39,26 @@ class Topbar extends Component {
             <div className="topbar">
                 <div>
                     <ul>
-                        <li>Women</li>
-                        <li>Men</li>
-                        <li>Kids</li>
+                        <li onClick={() => this.props.changeCategoryAction("all")}>All</li>
+                        <li onClick={() => this.props.changeCategoryAction("tech")}>Tech</li>
+                        <li onClick={() => this.props.changeCategoryAction("clothes")}>Clothes</li>
                     </ul>
                 </div>
                 <div>
-                    logo
+                    <img style={{width:"50px"}} src={logo} alt=""/>
                 </div>
                 <div className="icons">
                     <div>
                         <div className="dropdown">
-                        <FontAwesomeIcon icon={currency==="$" ? faDollarSign : currency==="€" ? faEuroSign : faYenSign}/>
+                        <FontAwesomeIcon icon={currency==="$" ? faDollarSign : currency==="£" ? faEuroSign : faYenSign}/>
                             <FontAwesomeIcon icon={faCaretDown} onClick={() => this.setState({dropdown: !this.state.dropdown})} className="dropbtn"/>
                             <div ref={this.wrapperRef} className="dropdown-currency" style={{display: this.state.dropdown ? "flex" : "none"}}>
                                 <span onClick={() => {
                                     this.props.changeCurrencyAction("$")
                                     this.setState({dropdown: false})}}>$ USD</span>
                                 <span onClick={() => {
-                                    this.props.changeCurrencyAction("€")
-                                    this.setState({dropdown: false})}}>€ EUR</span>
+                                    this.props.changeCurrencyAction("£")
+                                    this.setState({dropdown: false})}}>£ GBP</span>
                                 <span onClick={() => {
                                     this.props.changeCurrencyAction("¥")
                                     this.setState({dropdown: false})}}>¥ JPY</span>
@@ -77,12 +79,14 @@ class Topbar extends Component {
 const mapStateToProps = (state) => {
     return{
         cartReducer: state.cartReducer,
-        currency: state.currencyReducer
+        currency: state.currencyReducer,
+        category: state.categoryReducer,
     }
 }
 const mapDispatchToProps = () => {
     return{
-        changeCurrencyAction
+        changeCurrencyAction,
+        changeCategoryAction
     }
 }
 

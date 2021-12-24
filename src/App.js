@@ -5,13 +5,12 @@ import './App.css'
 import ProductList from "./layout/ProductList/ProductList";
 
 class App extends Component {
-
     render() {
         return (
             <>
             <Topbar/>
                 <div className="parent-cont">
-                    <CategoryName category={"Women"}/>
+                    <CategoryName />
                     <ProductList/>
                 </div>
             </>
