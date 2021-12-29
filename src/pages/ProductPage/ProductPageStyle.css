@@ -1,0 +1,116 @@
+.parent-cont{
+    padding: 50px 100px 0px 90px;
+}
+@media screen and (max-width: 600px){
+    .parent-cont{
+        padding: 0;
+    }
+}
+.product-page-grid{
+    display:grid;
+    grid-template-columns: 2fr 1fr;
+}
+.product-pictures{
+    display:grid;
+    grid-template-columns: 0.5fr 2fr;
+}
+.product-pictures img{
+    transition: 1s;
+    cursor: pointer
+}
+.product-pictures img:hover{
+    box-shadow: 1px 3px 15px rgba(0,0,0,0.2);
+}
+.more-pics{
+    display:grid;
+    grid-template-rows: 0.5fr 0.5fr 0.3fr 1fr;
+}
+.more-pics img{
+    padding: 10px;
+    max-width: 100px;
+}
+.main-pic img{
+    width: 500px;
+    padding: 5px;
+    max-width: 100%;
+}
+.product-description ul{
+    list-style: none;
+    display:flex;
+    margin:0;
+    max-width: 300px;
+    padding: 0;
+    flex-wrap: wrap;
+}
+.product-description ul li{
+    flex: 1;
+    cursor:pointer;
+    text-align: center;
+    margin: 5px;
+    padding: 15px;
+    border: 1px solid black;
+    transition: 1s;
+}
+.product-description{
+    padding-left: 10px;
+    width: 350px;
+}
+.product-description ul li:hover{
+    color:white;
+    background-color: black;
+}
+.product-description label{
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.add-to-cart-btn{
+    background-color: #5ECE7B;
+    border: none;
+    color:white;
+    width:100%;
+    text-transform: uppercase;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 20px 0;
+    transition: 1s;
+}
+.add-to-cart-btn:hover{
+    box-shadow: 3px 3px 15px #5ECE7B;
+}
+.product-paragraph{
+    padding-top: 40px;
+    font-size: 19px;
+}
+.product-paragraph p{
+    margin: 0;
+}
+.product-paragraph p span{
+    cursor:pointer;
+    font-weight: bold;
+    transition: 500ms;
+}
+.product-paragraph p span:hover{
+    text-decoration: underline;
+}
+@media screen and (max-width: 580px){
+    .product-page-grid{
+        grid-template-columns: 1fr;
+    }
+    .more-pics img{
+        padding: 0;
+    }
+}
+@media screen and (max-width: 350px){
+    .product-description ul{
+        width: 100%;
+    }
+    .product-description{
+        max-width: 200px;
+    }
+}
+@media screen and (max-width: 850px){
+    .more-pics img{
+        padding: 0;
+        max-width: 100%;
+    }
+}

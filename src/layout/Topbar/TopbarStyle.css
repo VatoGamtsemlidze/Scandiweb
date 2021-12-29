@@ -34,7 +34,17 @@
     transition: 1s;
     padding-left: 10px
 }
-.icons div:hover{
+.dropdown:hover{
+    color: #5ECE7B;
+}
+.cart-icon{
+    margin-top: -3px;
+}
+.cart-icon a{
+    transition: 500ms;
+    color: #26282c;
+}
+.cart-icon a:hover{
     color: #5ECE7B;
 }
 .dropdown{

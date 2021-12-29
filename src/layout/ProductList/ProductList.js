@@ -6,21 +6,32 @@ import {addItemAction, removeItemAction} from "../../store/cart/cartActions";
 import {connect} from "react-redux";
 import {client} from "../../index";
 import {gql} from "@apollo/client";
+import {Link} from "react-router-dom";
+import {productPagePath} from '../../components/routes'
 
 class ProductList extends Component {
 
     getImage() {
-        console.log(this.props.category.category)
         const category = this.props.category.category
-        console.log(category)
 
         client.query({
             query: gql`
                 query{
                   category(input: {title: "${category}"}){
                     products{
+                      id
                       name
                       gallery
+                      attributes{
+                        id
+                        name
+                        type
+                        items{
+                          displayValue
+                          value
+                          id
+                        }
+                      }
                       description
                       prices{
                         currency{
@@ -34,7 +45,6 @@ class ProductList extends Component {
                 }
             `
         }).then((res) => {
-            console.log(res)
             this.setState({
                 products: res?.data?.category?.products
             })
@@ -53,25 +63,28 @@ class ProductList extends Component {
 
     render() {
         const currency = this.props.currency.currency;
-
         return (
             <div style={{display:"flex",justifyContent:"center"}}>
             <div className="product-list">
                 {this.state?.products?.map(product => {
                     return(
-                        <div className="card" style={{maxWidth:"100%"}} key={product.name}>
-                            <img style={{maxWidth:"100%"}} src={product.gallery[0]} alt=""/>
-                            <div>
-                                <h3 style={{fontSize:"25px"}}>{product.name}</h3>
-                                <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
-                                    <h3 style={{fontWeight:400, fontSize:"22px"}}>
-                                        {currency == "$" ? product.prices[0].currency.symbol : currency == "£" ? product.prices[1].currency.symbol : product.prices[3].currency.symbol }
-                                        {currency == "$" ? product.prices[0].amount : currency == "£" ? product.prices[1].amount : product.prices[3].amount}
-                                    </h3>
-                                    <FontAwesomeIcon onClick={() => this.props.addItemAction(product)} icon={faShoppingCart} className="cart-icon"/>
+                            <div className="card"  key={product.name}>
+                                <Link to={productPagePath.replace(':id', product.id)} style={{display:"flex"}}>
+                                    <img style={{maxWidth:"100%"}} src={product.gallery[0]} alt=""/>
+                                </Link>
+                                <div>
+                                    <Link to={productPagePath.replace(':id', product.id)} style={{display:"flex"}}>
+                                        <h3 style={{fontSize:"25px"}}>{product.name}</h3>
+                                    </Link>
+                                    <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+                                        <h3 style={{fontWeight:400, fontSize:"22px"}}>
+                                            {currency}
+                                            {currency === "$" ? product.prices[0].amount : currency === "£" ? product.prices[1].amount : product.prices[3].amount}
+                                        </h3>
+                                        <FontAwesomeIcon onClick={() => this.props.addItemAction(product)} icon={faShoppingCart} className="cart-icon"/>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                     )
                 })}
             </div>

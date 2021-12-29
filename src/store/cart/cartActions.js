@@ -1,4 +1,4 @@
-import {ADD_ITEM,REMOVE_ITEM} from "./cartConsts";
+import {ADD_ITEM, CHANGE_ATTRIBUTE, REMOVE_ITEM} from "./cartConsts";
 
 export const addItemAction = (item) => {
     return{
@@ -6,9 +6,17 @@ export const addItemAction = (item) => {
         item
     }
 }
-export const removeItemAction = (index) => {
+export const removeItemAction = (id) => {
     return{
         type: REMOVE_ITEM,
-        index
+        id
+    }
+}
+export const changeAttributeAction = (itemID, attributeName, attributeID) => {
+    return {
+        type: CHANGE_ATTRIBUTE,
+        itemID,
+        attributeName,
+        attributeID
     }
 }
