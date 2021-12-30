@@ -2,17 +2,16 @@ import React, {Component} from 'react';
 import {connect} from "react-redux";
 import {removeItemAction,addItemAction,changeAttributeAction} from "../../store/cart/cartActions";
 import './CartPageStyle.css';
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {productPagePath} from "../../components/routes";
 import {Link} from "react-router-dom";
-import {faCheck} from "@fortawesome/free-solid-svg-icons";
-import {renderAttributeList} from "../../components/utils";
+import {attributeToPassFinder, renderAttributeList} from "../../components/utils";
 
 class CartPage extends Component {
 
     constructor() {
         super();
         this.renderAttributeList = renderAttributeList.bind(this)
+        this.attributeToPassFinder = attributeToPassFinder.bind(this)
     }
 
     render() {
@@ -27,7 +26,14 @@ class CartPage extends Component {
                 </div>
                 {cart.length === 0 ? <h1 style={{textAlign:"center",color:"#c3c3c3", fontWeight:"lighter",marginTop:"200px"}}>Cart is empty</h1>
                     :
-                    cart?.map(({item, quantity,attributeID}) => {
+                    cart?.map(({
+                                   item,
+                                   quantity,
+                                   sizeAttribute,
+                                   colorAttribute,
+                                   capacityAttribute,
+                                   usbAttribute,
+                                   touchIDAttribute}) => {
                         return(
                             <div key={item.name} className="cart-item">
                                 <div className="cart-item-desc">
@@ -43,34 +49,18 @@ class CartPage extends Component {
                                         console.log(attribute)
                                         return(
                                             <ul key={attribute.id}>
-                                                    <div className="attribute-size">
-                                                        <h4>{attribute.name}</h4>
-                                                        <div>
-                                                            {attribute.items.map((att) => (
-                                                                attribute.id !== "Color" ?
-                                                                        <li
-                                                                            onClick={() => this.props.changeAttributeAction(item.id,attribute.name, att.id)}
-                                                                            style={{background: att.id === attributeID ? "black" : "transparent", color: att.id === attributeID ? "white" : "black"}}
-                                                                            key={att.id}
-                                                                            >
-                                                                            {att.value}
-                                                                        </li>
-                                                                        :
-                                                                        <li
-                                                                            onClick={() => {
-                                                                                this.props.changeAttributeAction(item.id, attribute.name, att.id)
-                                                                            }}
-                                                                            style={{background: `${att.value}`, width:"5px", height:"5px", display:"flex", justifyContent:"center", alignItems:"center"}}>
-                                                                            {att.id === attributeID ?
-                                                                                <FontAwesomeIcon
-                                                                                    color={att.value !== "#FFFFFF" ? "white" : "black"}
-                                                                                    icon={faCheck}/>
-                                                                                : null
-                                                                            }
-                                                                        </li>
-                                                            ))}
-                                                        </div>
+                                                <div className="attribute-size">
+                                                    <h4>{attribute.name}</h4>
+                                                    <div>
+                                                        {attribute.items.map((att) => {
+                                                            const attributeArray = [sizeAttribute, colorAttribute, capacityAttribute, usbAttribute, touchIDAttribute];
+                                                            const attributeToPass = attributeToPassFinder(attributeArray, attribute)
+                                                            const matchAttName = attributeArray.find(att => att?.name === attribute.name)
+                                                            const attToPass = item?.checkedAttributes?.find(att => att.name === attribute.name);
+                                                            return (this.renderAttributeList(item.id, attribute.name, att, attToPass && !matchAttName ? attToPass : attributeToPass, attribute.id))
+                                                        })}
                                                     </div>
+                                                </div>
                                             </ul>
                                         )
                                     })}
@@ -94,7 +84,6 @@ class CartPage extends Component {
         );
     }
 }
-
 const mapStateToProps = (state) => {
     return {
         cartReducer: state.cartReducer,
@@ -108,5 +97,4 @@ const mapDispatchToProps = () => {
         changeAttributeAction,
     }
 }
-
 export default connect(mapStateToProps, mapDispatchToProps())(CartPage);

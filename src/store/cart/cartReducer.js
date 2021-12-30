@@ -14,13 +14,18 @@ export const cartReducer = (store = initialStore, action) => {
                 }
                 return item;
             })
+            const itemToInsert = {
+                item: action.item,
+                quantity: 1,
+                checkedAttributes: action.item.checkedAttributes
+            }
             return item ? {
                 ...store,
                 cart: products,
                 cartLength: store.cartLength+1
             } : {
                 ...store,
-                cart: [...store.cart, {item: action.item, quantity: 1}],
+                cart: [...store.cart, itemToInsert],
                 cartLength: store.cartLength+1
             }
         case REMOVE_ITEM:

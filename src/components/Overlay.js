@@ -10,13 +10,18 @@ import {cartPagePath} from "./routes";
 import {Link} from "react-router-dom";
 import {addItemAction, changeAttributeAction, removeItemAction} from "../store/cart/cartActions";
 import {connect} from "react-redux";
-import {renderAttributeList} from "./utils";
+import {attributeToPassFinder, renderAttributeList} from "./utils";
 
 class Overlay extends Component{
 
     constructor() {
         super();
         this.renderAttributeList = renderAttributeList.bind(this)
+        this.attributeToPassFinder = attributeToPassFinder.bind(this)
+    }
+
+    state = {
+        bool: true
     }
 
     render() {
@@ -58,12 +63,11 @@ class Overlay extends Component{
                                                             <h4>{attribute.name}</h4>
                                                             <div>
                                                                 {attribute.items.map((att) => {
-                                                                    //@Todo Should refactor this also (MAKE IT IN UTILS)
                                                                     const attributeArray = [sizeAttribute, colorAttribute, capacityAttribute, usbAttribute, touchIDAttribute];
-                                                                    const attributeToPass = attributeArray.map((attr => {
-                                                                        return typeof attr !== undefined && attr?.name === attribute.id ? attr : null
-                                                                    })).find(attr => attr !== null)
-                                                                    return (this.renderAttributeList(item.id, attribute.name, att, attributeToPass, attribute.id))
+                                                                    const attributeToPass = attributeToPassFinder(attributeArray, attribute)
+                                                                    const matchAttName = attributeArray.find(att => att?.name === attribute.name)
+                                                                    const attToPass = item?.checkedAttributes?.find(att => att.name === attribute.name);
+                                                                    return (this.renderAttributeList(item.id, attribute.name, att, attToPass && !matchAttName ? attToPass : attributeToPass, attribute.id))
                                                                 })}
                                                             </div>
                                                         </div>

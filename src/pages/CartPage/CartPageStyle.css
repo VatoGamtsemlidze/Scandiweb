@@ -51,7 +51,10 @@
 .attribute-size div{
     padding: 0;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+.color-attribute{
+    border: 2px solid blue;
 }
 .cart-item-desc ul{
     list-style: none;
@@ -78,6 +81,7 @@
     border: 1px solid black;
     transition: 1s;
 }
+
 .cart-item-image ul li:hover, .cart-item-desc ul li:hover{
     color:white;
     background-color: black;

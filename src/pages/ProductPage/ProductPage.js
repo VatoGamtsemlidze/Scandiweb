@@ -5,8 +5,14 @@ import {connect} from "react-redux";
 import {addItemAction, removeItemAction} from "../../store/cart/cartActions";
 import {client} from "../../index";
 import {gql} from "@apollo/client";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faCheck} from "@fortawesome/free-solid-svg-icons";
 
 class ProductPage extends Component {
+
+    state = {
+        attributes: []
+    }
 
     componentDidMount() {
         const id = this.props.match.params.id;
@@ -51,6 +57,11 @@ class ProductPage extends Component {
         })
     }
 
+    generateNewProduct() {
+        const newProduct = {...this.state.product, checkedAttributes: this.state.attributes}
+        this.props.addItemAction(newProduct)
+    }
+
     render() {
         const currency = this.props.currency.currency;
         const product = this.state?.product;
@@ -78,7 +89,38 @@ class ProductPage extends Component {
                             <h1 style={{width: "70%",fontWeight:"400",marginTop:"-15px"}}>{product?.name.substr(product?.name.indexOf(" ") +1)}<span></span></h1>
                         </div>
                         <div>
-                            <label>Size:</label>
+                            {product?.attributes.map(attribute => {
+                                return (
+                                    <ul key={attribute.id} style={{display: "flex", flexDirection:"column"}}>
+                                        <h4>{attribute.name}</h4>
+                                        <div style={{display:"flex",flexWrap:"wrap"}}>
+                                            {attribute.items.map(item => {
+                                                const stateAttributes = this.state.attributes;
+                                                const attributesToAdd = {name: attribute.name, id: item.id};
+                                                const checked = stateAttributes.find(att => att.name === attribute.name)
+                                                return(
+                                                    <li
+                                                        onClick={() => {
+                                                            const item = stateAttributes.find(att => att.name === attribute.name)
+                                                            const itemIndex = stateAttributes.indexOf(item)
+                                                            item ? stateAttributes.splice(itemIndex, 1, attributesToAdd) : stateAttributes.push(attributesToAdd);
+
+                                                            this.setState({attributes: stateAttributes})
+                                                        }}
+                                                        key={item.id}
+                                                        style={attribute.name === "Color" ? {backgroundColor:item.value} : checked?.id === item.id ? {backgroundColor:  "black", color:"white"} : {backgroundColor:"white", color:"black"}}
+                                                    >
+                                                        {attribute.name !== "Color" ?  item.value : checked?.id === item.id ? <FontAwesomeIcon
+                                                                color={item.value !== "#FFFFFF" ? "white" : "black"}
+                                                                icon={faCheck}/>
+                                                            : <span>&nbsp;</span>}
+                                                    </li>
+                                                )
+                                            })}
+                                        </div>
+                                    </ul>
+                                )
+                            })}
                         </div>
                         <div style={{paddingTop:"20px"}}>
                             <label><strong>Price: </strong></label>
@@ -87,8 +129,9 @@ class ProductPage extends Component {
                                     {currency === "$" ? product?.prices[0].amount : currency === "£" ? product?.prices[1].amount : product?.prices[3].amount}
                                 </h2>
                         </div>
+
                         <div>
-                            <button className="add-to-cart-btn"onClick={() => this.props.addItemAction(product)}>Add To Cart</button>
+                            <button className="add-to-cart-btn"onClick={() => /*this.props.addItemAction(product)}*/ this.generateNewProduct() }>Add To Cart</button>
                         </div>
                         <div className="product-paragraph">
                             {description?.length >= 250 && !this.state?.showFullDesc ?

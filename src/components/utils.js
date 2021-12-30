@@ -23,7 +23,7 @@ export function renderAttributeList(itemID, attributeName, att, attributeType, a
                 onClick={() => {
                     this.props.changeAttributeAction(itemID, attributeName, att.id)
                 }}
-                style={{background: `${att?.value}`,border:"none",borderRadius:"5px", width:"5px", height:"20px", display:"flex", justifyContent:"center", alignItems:"center"}}>
+                style={{background: `${att?.value}`,border:att.value ==="#FFFFFF" ? "1px solid lightgray" : "none",borderRadius:"5px", width:"5px", height:"20px", display:"flex", justifyContent:"center", alignItems:"center"}}>
                 {att?.id === attributeType?.id ?
                     <FontAwesomeIcon
                         color={att.value !== "#FFFFFF" ? "white" : "black"}
@@ -33,4 +33,10 @@ export function renderAttributeList(itemID, attributeName, att, attributeType, a
             </li>
         );
     }
+}
+export function attributeToPassFinder(attributeArray,attribute) {
+    const attributeToPass = attributeArray.map((attr => {
+        return typeof attr !== undefined && attr?.name === attribute.id ? attr : null
+    })).find(attr => attr !== null)
+    return attributeToPass;
 }
