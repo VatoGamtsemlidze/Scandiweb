@@ -22,6 +22,20 @@ export const ModalStyled = styled.div`
   transform: translate(-50%);
   min-width: 21rem;
   z-index: 2;
+  .item-list{
+    &::-webkit-scrollbar {
+        width: 7px;
+        border-radius: 200px;
+    }
+    ::-webkit-scrollbar-track {
+      box-shadow: inset 0px 0px 0px 0.5px lightgrey; 
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: lightgray; 
+      border-radius: 10px;
+    }
+  }
   @media (max-width: 1300px){
     left: 80%
   }
@@ -36,6 +50,8 @@ export const ModalStyled = styled.div`
   }
 `;
 export const CartOverlayItemStyled = styled.div`
+    margin-top: 1px;
+    border-bottom: 1px solid #f3f3f3;
     display:flex;
     .description{
         width: 50%;

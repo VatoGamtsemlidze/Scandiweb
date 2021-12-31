@@ -37,7 +37,7 @@ class Overlay extends Component{
                             <h4 style={{margin: "0", fontWeight: "500"}}>My Bag,</h4>
                             <span>&nbsp;{cart.length} item{cart.length > 1 ? "s" : null}</span>
                         </div>
-                        <div style={{padding: 0}}>
+                        <div className="item-list" style={{padding: 0, overflowY: "scroll", height: cart.length > 1 ? "500px" : null}}>
                             {cart.map(({
                                            item,
                                            quantity,
