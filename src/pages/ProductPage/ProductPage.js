@@ -7,8 +7,15 @@ import {client} from "../../index";
 import {gql} from "@apollo/client";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCheck} from "@fortawesome/free-solid-svg-icons";
+import {Toast} from "../../components/Toast";
+import {currencyAmountTracker} from "../../components/utils";
 
 class ProductPage extends Component {
+
+    constructor() {
+        super();
+        this.currencyAmountTracker = currencyAmountTracker.bind(this)
+    }
 
     state = {
         attributes: []
@@ -125,13 +132,16 @@ class ProductPage extends Component {
                         <div style={{paddingTop:"20px"}}>
                             <label><strong>Price: </strong></label>
                                 <h2>
-                                    {currency === "$" ? product?.prices[0].currency.symbol : currency === "£" ? product?.prices[1].currency.symbol : product?.prices[3].currency.symbol }
-                                    {currency === "$" ? product?.prices[0].amount : currency === "£" ? product?.prices[1].amount : product?.prices[3].amount}
+                                    {currency}
+                                    {currencyAmountTracker(currency, product)}
                                 </h2>
                         </div>
 
                         <div>
-                            <button className="add-to-cart-btn"onClick={() => /*this.props.addItemAction(product)}*/ this.generateNewProduct() }>Add To Cart</button>
+                            <button className="add-to-cart-btn"onClick={() => {
+                                this.generateNewProduct();
+                                this.setState({showToast: true})
+                            }}>Add To Cart</button>
                         </div>
                         <div className="product-paragraph">
                             {description?.length >= 250 && !this.state?.showFullDesc ?
@@ -141,18 +151,22 @@ class ProductPage extends Component {
                         </div>
                     </div>
                 </div>
+                {this.state?.showToast ?
+                    <div style={{position: "absolute", top: "2%", left: "44%"}}>
+                        <Toast toastOff={() => this.setState({showToast: false})}/>
+                    </div>
+                    :
+                    null}
             </div>
         );
     }
 }
-
 const mapStateToProps = (state) => {
     return{
         cartReducer: state.cartReducer,
         currency: state.currencyReducer
     }
 }
-
 const mapDispatchToProps = () => {
     return{
         addItemAction,
@@ -160,5 +174,4 @@ const mapDispatchToProps = () => {
 
     }
 }
-
 export default connect(mapStateToProps,mapDispatchToProps()) (withRouter(ProductPage));

@@ -7,7 +7,6 @@ import {productsPagePath, productPagePath, cartPagePath} from "./components/rout
 import ProductPage from "./pages/ProductPage/ProductPage";
 import CartPage from "./pages/CartPage/CartPage";
 
-
 class App extends Component {
 
     render() {

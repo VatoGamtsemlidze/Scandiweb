@@ -33,7 +33,6 @@ export const cartReducer = (store = initialStore, action) => {
             const indexOfItem = store.cart.indexOf(findItem)
             const items = store.cart.filter(item => item.item.id !== action.id);
             findItem.quantity > 1 && items.splice(indexOfItem, 0,{item: findItem.item, quantity: findItem.quantity - 1})
-            console.log(items)
             return {
                 ...store,
                 cart: items,

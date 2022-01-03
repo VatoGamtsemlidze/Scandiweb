@@ -36,11 +36,20 @@ export const ModalStyled = styled.div`
       border-radius: 10px;
     }
   }
-  @media (max-width: 1300px){
+  @media (max-width: 1600px){
+    left: 83.5%
+  }
+  @media (max-width: 1400px){
     left: 80%
   }
-  @media (max-width: 1000px){
+  @media (max-width: 1150px){
+    left: 78%
+  }
+  @media (max-width: 1050px){
     left: 74%
+  }
+  @media (max-width: 850px){
+    left: 70%
   }
   @media (max-width: 650px){
     left: 60%
@@ -51,7 +60,7 @@ export const ModalStyled = styled.div`
 `;
 export const CartOverlayItemStyled = styled.div`
     margin-top: 1px;
-    border-bottom: 1px solid #f3f3f3;
+    border-bottom: 1px solid #dbdbdb;
     display:flex;
     .description{
         width: 50%;

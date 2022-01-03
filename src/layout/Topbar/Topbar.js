@@ -81,17 +81,15 @@ class Topbar extends Component {
                     <div>
                     </div>
                     <div className="cart-icon" onClick={() => this.toggleOverlay()}>
-                        {/*<Link to={cartPagePath}>*/}
                             <FontAwesomeIcon icon={faShoppingCart}/>
                             <span style={{background:"black",color:"white",padding:"1px 5px", fontSize:"12px",borderRadius:"100%",position:"absolute",marginLeft:"-3px"}}>{this.props.cartReducer.cart.length}</span>
-                        {/*</Link>*/}
                     </div>
                     {
                         this.state.showCartOverlay && <Overlay onCloseRequest={() => this.setState({showCartOverlay: false})}/>
                     }
                 </div>
             </div>
-    );
+        );
     }
 }
 const mapStateToProps = (state) => {
@@ -107,6 +105,4 @@ const mapDispatchToProps = () => {
         changeCategoryAction,
     }
 }
-
-
 export default connect(mapStateToProps, mapDispatchToProps())(Topbar);

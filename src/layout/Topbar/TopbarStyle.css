@@ -1,10 +1,11 @@
 .topbar{
     display:flex;
-    padding: 20px 100px 20px 90px;
+    padding: 20px 100px 0px 90px;
     justify-content: space-between;
+    align-items: center;
     flex-wrap: wrap;
+    border-bottom: 1px solid #e7e7e7;
 }
-
 .topbar ul{
     margin:0;
     padding:0;
@@ -15,8 +16,6 @@
     text-transform: uppercase;
     transition: 1s;
     font-weight: lighter;
-}
-.topbar ul li{
     cursor:pointer;
     padding: 0 10px 20px 10px;
 }
@@ -34,7 +33,7 @@
     transition: 1s;
     padding-left: 10px
 }
-.dropdown:hover{
+.dropdown span:hover{
     color: #5ECE7B;
 }
 .cart-icon{
@@ -45,7 +44,6 @@
     color: #26282c;
 }
 .cart-icon a:hover{
-    color: #5ECE7B;
 }
 .dropdown{
     transition: 1s;
@@ -55,7 +53,6 @@
     border: none;
     cursor: pointer;
 }
-
 .dropdown-currency {
     display: flex;
     flex-direction: column;
@@ -67,6 +64,7 @@
 }
 .dropdown-currency span{
     padding-top: 5px;
+    transition: 300ms;
 }
 @media screen and (max-width: 550px){
     .topbar{

@@ -8,8 +8,16 @@ import {client} from "../../index";
 import {gql} from "@apollo/client";
 import {Link} from "react-router-dom";
 import {productPagePath} from '../../components/routes'
+import {Toast} from "../../components/Toast";
+import {currencyAmountTracker} from "../../components/utils";
 
 class ProductList extends Component {
+
+    constructor(props) {
+        super(props);
+        this.currencyAmountTracker = currencyAmountTracker.bind(this)
+    }
+
 
     getImage() {
         const category = this.props.category.category
@@ -79,15 +87,24 @@ class ProductList extends Component {
                                     <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
                                         <h3 style={{fontWeight:400, fontSize:"22px"}}>
                                             {currency}
-                                            {currency === "$" ? product.prices[0].amount : currency === "£" ? product.prices[1].amount : product.prices[3].amount}
+                                            {currencyAmountTracker(currency,product)}
                                         </h3>
-                                        <FontAwesomeIcon onClick={() => this.props.addItemAction(product)} icon={faShoppingCart} className="cart-icon"/>
+                                        <FontAwesomeIcon onClick={() => {
+                                            this.setState({showToast: true})
+                                            this.props.addItemAction(product)
+                                        }} icon={faShoppingCart} className="cart-icon"/>
                                     </div>
                                 </div>
                             </div>
                     )
                 })}
             </div>
+                {this.state?.showToast ?
+                    <div style={{position: "fixed", top: "2%", left: "44%"}}>
+                        <Toast toastOff={() => this.setState({showToast: false})} text="Item has been successfully added to cart"/>
+                    </div>
+                    :
+                    null}
                 </div>
         );
     }

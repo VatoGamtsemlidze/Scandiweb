@@ -16,7 +16,7 @@ export function renderAttributeList(itemID, attributeName, att, attributeType, a
                 {att?.value}
             </li>
         );
-    }else {
+    } else {
         return (
             <li
                 key={att?.id}
@@ -39,4 +39,14 @@ export function attributeToPassFinder(attributeArray,attribute) {
         return typeof attr !== undefined && attr?.name === attribute.id ? attr : null
     })).find(attr => attr !== null)
     return attributeToPass;
+}
+export function currencyAmountTracker(currency, product){
+    switch (currency){
+        case "$":
+            return product?.prices[0].amount
+        case "£":
+            return product?.prices[1].amount
+        default:
+            return product?.prices[3].amount
+    }
 }

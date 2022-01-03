@@ -6,7 +6,6 @@
     .parent-container{
         padding: 0 5px;
     }
-
 }
 .cart-title h1{
     font-weight: 500;
@@ -81,7 +80,6 @@
     border: 1px solid black;
     transition: 1s;
 }
-
 .cart-item-image ul li:hover, .cart-item-desc ul li:hover{
     color:white;
     background-color: black;

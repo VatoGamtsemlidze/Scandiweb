@@ -30,12 +30,13 @@
     justify-content: space-between;
     padding:15px;
     max-width: 350px;
-    border: 1px solid #f4f8f5;
+    border: 1px solid #e7e7e7;
+    border-radius: 5px;
     cursor: pointer;
     transition: 1s;
 }
 .card:hover{
-    box-shadow: 1px 1px rgb(212, 241, 215);
+    box-shadow: 1px 1px 1px rgb(212, 241, 215);
     transform: scale(1.02);
     border-radius: 10px;
 }

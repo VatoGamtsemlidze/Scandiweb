@@ -9,8 +9,8 @@ import {
 import {cartPagePath} from "./routes";
 import {Link} from "react-router-dom";
 import {addItemAction, changeAttributeAction, removeItemAction} from "../store/cart/cartActions";
+import {attributeToPassFinder, currencyAmountTracker, renderAttributeList} from "./utils";
 import {connect} from "react-redux";
-import {attributeToPassFinder, renderAttributeList} from "./utils";
 
 class Overlay extends Component{
 
@@ -18,6 +18,7 @@ class Overlay extends Component{
         super();
         this.renderAttributeList = renderAttributeList.bind(this)
         this.attributeToPassFinder = attributeToPassFinder.bind(this)
+        this.currencyAmountTracker = currencyAmountTracker.bind(this)
     }
 
     state = {
@@ -33,7 +34,7 @@ class Overlay extends Component{
                 <ModalBackgroundStyled onClick={this.props.onCloseRequest}/>
                 <ModalStyled>
                     <div style={{padding: "5px"}}>
-                        <div style={{display: "flex"}}>
+                        <div style={{display: "flex", margin:"5px 0px"}}>
                             <h4 style={{margin: "0", fontWeight: "500"}}>My Bag,</h4>
                             <span>&nbsp;{cart.length} item{cart.length > 1 ? "s" : null}</span>
                         </div>
@@ -47,14 +48,14 @@ class Overlay extends Component{
                                            usbAttribute,
                                            touchIDAttribute
                                        }) => {
-                                total += currency === "$" ? item.prices[0]?.amount * quantity : currency === "£" ? item.prices[1]?.amount * quantity : item.prices[3]?.amount * quantity
+                                total += currencyAmountTracker(currency, item)*quantity;
                                 return (
                                     <CartOverlayItemStyled key={item.id} style={{padding: "15px 0px"}}>
                                         <div className="description">
                                             <h4>{item.name}</h4>
                                             <h1>
                                                 {currency}
-                                                {currency === "$" ? item.prices[0]?.amount : currency === "£" ? item.prices[1]?.amount : item.prices[3]?.amount}
+                                                {currencyAmountTracker(currency, item)}
                                             </h1>
                                             {item.attributes.map((attribute) => {
                                                 return (
