@@ -11,8 +11,8 @@ class CartPage extends Component {
     constructor() {
         super();
         this.renderAttributeList = renderAttributeList.bind(this)
-        this.attributeToPassFinder = attributeToPassFinder.bind(this)
         this.currencyAmountTracker = currencyAmountTracker.bind(this)
+        this.attributeToPassFinder = attributeToPassFinder.bind(this)
     }
     render() {
         const cart = this.props.cartReducer.cart;
@@ -48,7 +48,6 @@ class CartPage extends Component {
                                         {currencyAmountTracker(currency, item)}
                                     </h1>
                                     {item?.attributes?.map((attribute) => {
-                                        console.log(attribute)
                                         return(
                                             <ul key={attribute.id}>
                                                 <div className="attribute-size">

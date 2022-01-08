@@ -136,12 +136,11 @@ class ProductPage extends Component {
                                     {currencyAmountTracker(currency, product)}
                                 </h2>
                         </div>
-
                         <div>
                             <button className="add-to-cart-btn"onClick={() => {
                                 this.generateNewProduct();
                                 this.setState({showToast: true})
-                            }}>Add To Cart</button>
+                                }}>Add To Cart</button>
                         </div>
                         <div className="product-paragraph">
                             {description?.length >= 250 && !this.state?.showFullDesc ?
@@ -154,9 +153,7 @@ class ProductPage extends Component {
                 {this.state?.showToast ?
                     <div style={{position: "absolute", top: "2%", left: "44%"}}>
                         <Toast toastOff={() => this.setState({showToast: false})} text="Item has been successfully added to cart"/>
-                    </div>
-                    :
-                    null}
+                    </div> : null}
             </div>
         );
     }
