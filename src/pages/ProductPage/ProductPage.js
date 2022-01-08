@@ -153,7 +153,7 @@ class ProductPage extends Component {
                 </div>
                 {this.state?.showToast ?
                     <div style={{position: "absolute", top: "2%", left: "44%"}}>
-                        <Toast toastOff={() => this.setState({showToast: false})}/>
+                        <Toast toastOff={() => this.setState({showToast: false})} text="Item has been successfully added to cart"/>
                     </div>
                     :
                     null}

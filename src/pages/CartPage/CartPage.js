@@ -25,7 +25,8 @@ class CartPage extends Component {
                 </div>
                 {cart.length === 0 ? <h1 style={{textAlign:"center",color:"#c3c3c3", fontWeight:"lighter",marginTop:"200px"}}>Cart is empty</h1>
                     :
-                    cart?.map(({
+                    <div>
+                        {cart?.map(({
                                    item,
                                    quantity,
                                    sizeAttribute,
@@ -81,17 +82,19 @@ class CartPage extends Component {
                             </div>
                             </>
                         )
-                    })}
-                <div style={{display:"flex", justifyContent:"space-between",padding:"30px"}}>
-                    <h2 style={{fontWeight:"500",margin:"0px"}}>Total: {currency}{total.toFixed(2)}</h2>
-                    <button style={{padding:"12px 35px",cursor:"pointer",fontSize:"15px", border:"none", borderRadius:"5px", background:"#5ECE7B", color:"white"}} onClick={()=>this.setState({showToast:true})}>Pay</button>
-                </div>
-                {this.state?.showToast ?
-                    <div style={{position: "fixed", top: "2%", left: "44%"}}>
-                        <Toast toastOff={() => this.setState({showToast: false})} text="Transaction has been made successfully!"/>
+                        })}
+                        <div style={{display:"flex", justifyContent:"space-between",padding:"30px"}}>
+                            <h2 style={{fontWeight:"500",margin:"0px"}}>Total: {currency}{total.toFixed(2)}</h2>
+                            <button style={{padding:"12px 35px",cursor:"pointer",fontSize:"15px", border:"none", borderRadius:"5px", background:"#5ECE7B", color:"white"}} onClick={()=>this.setState({showToast:true})}>Pay</button>
+                        </div>
+                        {this.state?.showToast ?
+                            <div style={{position: "fixed", top: "2%", left: "44%"}}>
+                                <Toast toastOff={() => this.setState({showToast: false})} text="Transaction has been made successfully!"/>
+                            </div>
+                            :
+                            null}
                     </div>
-                    :
-                    null}
+                }
             </div>
         );
     }
